@@ -1,0 +1,438 @@
+﻿@using HompPage.Models;
+
+@model HompPage.Models.Members
+
+@{
+    ViewBag.Title = "Entry";
+    Layout = "~/Views/Shared/_HomePageLayoutPage.cshtml";
+
+    Response.Write(ViewBag.Result);
+}
+
+<div class="content-wrap">
+
+    <div id="feedback" class="inner-content">
+
+        <section id="page-title" class="inner-section">
+            <div class="container-fluid nopadding wow fadeInRight" data-wow-delay="0.4s" data-wow-offset="10">
+                <h2 class="font-accident-two-normal uppercase">Member</h2>
+                <h5 class="font-accident-one-bold hovercolor uppercase">Hard-working person on the way to the success...</h5>
+                <p class="small fontcolor-medium">
+                    @*내용입력*@
+                </p>
+            </div>
+        </section>
+
+        <!-- Feedback Block -->
+        <section class="inner-section feedback feedback-light">
+            <div class="container-fluid nopadding">
+                <div class="row">
+
+                    <div class="col-md-2">&nbsp;</div>
+                    <div class="col-md-8 e-centered wow fadeInDown" data-wow-delay="0.6s" data-wow-offset="10">
+                        <div class="dividewhite2"></div>
+                        <div id="form-messages"></div>
+
+
+                        <form method="post" action="@Url.Action("Entry" , "Member")" class="wpcf7-form">
+
+
+                            <div class="field">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        @Html.TextBoxFor(m => m.MemberID, new { placeholder = "아이디를 입력하세요" })
+                                    </div>
+                                    <button type="button" onclick="return fnDoubleCheck();" class="btn btn-lg btn-lgr-str">중복 검사</button>
+                                </div>
+                            </div>
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.MemberName, new { placeholder = "이름을 입력하세요" })
+                            </div>
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.MemberPWD, new { placeholder = "암호를 입력하세요" })
+                            </div>
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.Email, new { placeholder = "메일을 입력하세요" })
+                            </div>
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.Telephone, new { placeholder = "전화번호를 입력하세요" })
+                            </div>
+                            <div class="dividewhite2"></div>
+                            <div class="field text-center">
+                                @*버튼을 누르면 함수를 실행한다.*@
+                                <button type="submit" onclick="return fnSaveCheck();" class="btn btn-lg btn-lgr-str">가입하기</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2">&nbsp;</div>
+                    <div class="col-md-12 divider-dynamic"></div>
+                </div>
+            </div>
+            <div class="dividewhite6"></div>
+        </section>
+
+
+        <!-- /Feedback Block -->
+        <!-- Testmonials Block -->
+        @*<section id="testmonials" class="inner-section color01">
+            <div class="container-fluid nopadding">
+
+                <div class="wow fadeInDown" data-wow-delay="0.4s" data-wow-offset="10">
+                    <h3 class="font-accident-two-normal uppercase text-center">Testmonials</h3>
+                    <h5 class="font-accident-one-bold uppercase hovercolor text-center">Working hard and making the success</h5>
+                    <div class="dividewhite1"></div>
+                    <p class="small fontcolor-medium text-center">
+                        Customize your website as you want using different colors and 100% free fonts. Build it from pieces and
+                        blocks as simple as Lego. <br>
+                        Electronic Website Template is fully responsive, looks and works perfect on any device.
+                    </p>
+                </div>
+
+                <div class="dividewhite4"></div>
+
+                <div class="row">
+                    <div class="col-md-4 wow fadeInLeft" data-wow-delay="0.5s" data-wow-offset="10">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="assets/custom/images/userpic04.jpg" alt="Rachel James Johnes" class="img-responsive img-circle author-userpic">
+                            </div>
+                            <div class="col-xs-9">
+                                <h5 class="font-accident-one-bold text-left uppercase">Hans Zimmer</h5>
+                                <p class="small hovercolor">Apple Inc.</p>
+                                <p class="text-left small">
+                                    With more devices come varying screen resolutions, definitions and orientations. New devices
+                                    with new screen sizes are being developed every day, and each of these devices may be able...
+                                </p>
+                            </div>
+                        </div>
+                        <div class="divider-dynamic"></div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="10">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="assets/custom/images/userpic02.jpg" alt="Rachel James Johnes" class="img-responsive img-circle author-userpic">
+                            </div>
+                            <div class="col-xs-9">
+                                <h5 class="font-accident-one-bold text-left uppercase">Mario Quinn</h5>
+                                <p class="small hovercolor">Adobe</p>
+                                <p class="text-left small">
+                                    With more devices come varying screen resolutions, definitions and orientations. New devices
+                                    with new screen sizes are being developed every day, and each of these devices
+                                </p>
+                            </div>
+                        </div>
+                        <div class="divider-dynamic"></div>
+                    </div>
+                    <div class="col-md-4 wow fadeInRight" data-wow-delay="0.5s" data-wow-offset="10">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="assets/custom/images/userpic03.jpg" alt="Rachel James Johnes" class="img-responsive img-circle author-userpic">
+                            </div>
+                            <div class="col-xs-9">
+                                <h5 class="font-accident-one-bold text-left uppercase">Karl Romm</h5>
+                                <p class="small hovercolor">BMW</p>
+                                <p class="text-left small">
+                                    With more devices come varying screen resolutions, definitions and orientations. New devices
+                                    with new screen sizes are being developed every day, and each of these devices
+                                </p>
+                            </div>
+                        </div>
+                        <div class="divider-dynamic"></div>
+                    </div>
+                </div>
+
+                <div class="dividewhite6"></div>
+
+            </div>
+        </section>*@
+
+        <!-- Portfolio Block -->
+        <section id="portfolio-block" class="inner-section wow fadeInDown" data-wow-delay="0.4s" data-wow-offset="10">
+
+            <div class="dividewhite4"></div>
+
+            <div id="isotope-filters" class="port-filter port-filter-light text-center">
+                <ul>
+                    <li><a href="#cat1" data-filter="*">All</a></li>
+                    <li><a href="#cat2" data-filter=".expertise">Expertise</a></li>
+                    <li><a href="#cat3" data-filter=".experience">Experience</a></li>
+                    <li><a href="#cat4" data-filter=".seo">SEO</a></li>
+                </ul>
+            </div>
+
+            <div class="dividewhite3"></div>
+
+            <div class="grid container-fluid text-center">
+
+                <div id="posts" class="row popup-container">
+
+                    <div class="grid-item seo col-sm-12">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/00.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/00.jpg" class="img-responsive'" alt="img11" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>Experience <span></span></h3>
+                                        <p>#wep #seo </p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="grid-item experience col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/01.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/01.jpg" class="img-responsive'" alt="img11" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>생활체육 복싱대회 <span>서울 마포</span></h3>
+                                        <p>#Experience</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item expertise grid-sizer col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/02.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/02.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>IOT개발자 양성과정 <span>충북 융합 기술원</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item marketing experience col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/03.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/03.jpg" class="img-responsive" alt="img11" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>생활체육 복싱대회 <span>우석 대학교</span></h3>
+                                        <p>#Experience</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item marketing experience col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/04.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/04.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>생활체육 복싱대회 <span>용인 대학교</span></h3>
+                                        <p>#Experience</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item web marketing experience col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/05.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/05.jpg" class="img-responsive" alt="img11" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>생활체육 복싱대회 <span>제 7회 청주 시장배</span></h3>
+                                        <p>#Experience </p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item expertise uncategorized col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/06.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/06.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>i-피시리움 <span>하드웨어</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="grid-item expertise col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/07.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/07.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>i-피시리움 <span>전체모습</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                  
+                    
+
+                    <div class="grid-item marketing expertise col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/00.png" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/00.png" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>충북 기능경기 대회 <span>CNC선반 부분 수상</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="grid-item marketing expertise col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/10.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/10.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>MES프로그램 <span>C# , SQL</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="grid-item marketing expertise col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-wrap">
+                            <figure class="effect-goliath">
+                                <div class="popup-call">
+                                    <a href="/Template/assets/custom/images/magazine/thumbs/11.jpg" class="gallery-item"><i class="flaticon-arrows-4"></i></a>
+                                </div>
+                                <img src="/Template/assets/custom/images/magazine/thumbs/11.jpg" class="img-responsive" alt="img03" />
+                                <figcaption>
+                                    <div class="fig-description">
+                                        <h3>C# , Windowform <span>C# , SQL</span></h3>
+                                        <p>#Expertise</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="dividewhite8"></div>
+
+        </section>
+        <!-- /Portfolio Block -->
+
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#btnSave").attr("disabled", true);
+
+            var result = '@ViewBag.Result';
+
+            if (result == 'OK') {
+                alert("정상적으로 저장되었습니다.");
+            }
+
+            if (result == 'FAIL') {
+                alert("저장 작업을 실패하였습니다.");
+            }
+        });
+
+        //버튼을 누르면 공백 검사를 한다.
+        function fnSaveCheck() {
+            if ($("#MemberID").val() == "") {
+                alert("아이디를 입력해주세요.")
+                $("#MemberID").focus();
+                return false;
+            }
+            if ($("#MemberName").val() == "") {
+                alert("성함을 입력해주세요.")
+                $("#MemberName").focus();
+                return false;
+            }
+            if ($("#MemberPWD").val() == "") {
+                alert("비밀번호를 입력해주세요.")
+                $("#MemberPWD").focus();
+                return false;
+            }
+            return true;
+        }
+
+        //아이디 중복검사
+        function fnDoubleCheck() {
+
+            if ($("#MemberID").val() == "") {
+                alert("아이디를 입력해주십시오.")
+                $("#MemberID").focus();
+                return false;
+            }
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Member/IDCheck?memberid=' + $("#MemberID").val(),
+                data: "{}",
+                dataType: "json"
+            })
+                .done(function (response) {
+                    if (response == "OK") {
+                        alert("사용 가능 아이디입니다.");
+                        $("#btnSave").removeAttr("disabled");
+                    } else {
+                        alert("중복 아이디가 존재합니다.");
+                        $('#MemberID').val('');
+                        $('#MemberID').focus();
+                        $("#btnSave").attr("disabled", true);
+                    }
+                })
+                .fail(function (data) {
+                    if (data.responseText != '') {
+                        alert(data.responseText);
+                    } else {
+                        alert("에러가 발생했습니다.");
+                    }
+                });
+        }
+        
+    </script>
+}
